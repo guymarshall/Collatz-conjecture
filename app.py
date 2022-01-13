@@ -1,7 +1,7 @@
 import math
 
 
-def isPrimeNumber(number):
+def is_prime_number(number):
     ceiling_root = math.ceil(math.sqrt(number));
     if ceiling_root >= number:
         ceiling_root = number - 1
@@ -14,19 +14,9 @@ def isPrimeNumber(number):
     return True
 
 
-def calculateFactorial(number):
-    result = 1
-    counter = 2
-    if number > 1:
-        while counter <= number < 1:
-            result = result * counter
-            counter += 1
-    return result;
-
-
-def calculate(number):
+def collatz(number):
     counter = 0
-    while number > 0:
+    while number > 1:
         counter += 1
 
         if number % 2 != 0:
@@ -40,8 +30,7 @@ def calculate(number):
 def main():
     message = """
 0 - PrimeNumber
-1 - Factorial
-2 - CollatzConjecture
+1 - CollatzConjecture
 Choose method: """
     method_choice = int(input(message))
 
@@ -50,31 +39,23 @@ Choose method: """
 
         counter = 2
         while counter <= prime_input:
-            is_prime = isPrimeNumber(counter)
+            is_prime = is_prime_number(counter)
             if is_prime:
                 print(f"{counter} is a prime number")
             counter += 1
     elif method_choice == 1:
-        factorial_input = int(input("Enter an integer: "))
-        print(f"{factorial_input}! = {calculateFactorial(factorial_input)}")
-    elif method_choice == 2:
         collatz_input = int(input("Enter a whole number: "))
         user_decision = input("Calculate SINGLE or ALL? ")
 
         if user_decision.upper() == "SINGLE":
-            print(f"{collatz_input}: {calculate(collatz_input)}")
+            print(f"{collatz_input}: {collatz(collatz_input)}")
         else:
             counter = 1
             while counter <= collatz_input:
-                print(f"{counter}: {calculate(counter)}")
+                print(f"{counter}: {collatz(counter)}")
             counter += 1
     else:
         print(f"{method_choice} is invalid. Please try again.")
 
 if __name__ == "__main__":
     main()
-
-
-
-# FACTORIAL ALWAYS RETURNS 1 FOR SOME REASON
-# COLLATZ HAS INFINITE LOOP WITHOUT PRINTING
