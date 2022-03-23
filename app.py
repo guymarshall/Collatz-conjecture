@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 
 def collatz(number):
@@ -28,37 +27,47 @@ def return_collatz_max(number):
     return max
 
 
-def return_collatz_array(number):
-    answers = [number]
-    while number > 1:
-        if number % 2 != 0:
-            number = (number * 3) + 1
-        else:
-            number /= 2
-
-        answers.append(number)
-
-    return answers
-
-
 def main():
-    collatz_input = int(input("Enter a whole number: "))
-    user_decision = input("Calculate MAX or ALL? ")
+    # #ask if user wants to continue with number in file or start from another number
+    # user_decision = input("Do you want to:\nCONTINUE going or try a NEW number: ")
 
-    if user_decision.upper() == "MAX":
-        y_points = np.array(return_collatz_array(collatz_input))
+    # if user_decision.upper() == "NEW":
+    #     number = int(input("Enter a whole number: "))
+        
+    #     if number % 1 != 0:
+    #         print("Invalid input. Please try again.")
+    #         main()
 
-        plt.plot(y_points, linestyle = "dotted")
-        plt.show()
+    #     #clear contents
+    #     file = open("collatz_data.txt", "w")
+        
+    #     while True:
+    #         print(f"{number}: {collatz(number)}")
+    #         #clear contents and write input,max,steps (number,return_collatz_max,collatz(number))
+    #         file_data = f"input:{number},max:{return_collatz_max(number)},steps:{collatz(number)}"
+    #         file.write(file_data)
+    #         print(file.read())
+    #         number += 1
+    #     file.close()
+            
+    # elif user_decision.upper() == "CONTINUE":
+    #     number = open("collatz_data.txt", "r").read()
+    #     number.close()
+    #     #continue processing from that number
 
-    elif user_decision.upper() == "ALL":
-        counter = 1
-        while counter <= collatz_input:
-            print(f"{counter}: {collatz(counter)}")
-            counter += 1
-    else:
-        print("Invalid input. Please try again.")
-        main()
+    #     file = open("collatz_data.txt", "w")
+    #     while True:
+    #         print(f"{number}: {collatz(number)}")
+    #         number += 1
+    # else:
+    #     print("Invalid input. Please try again.")
+    #     main()
+
+    user_input = int(input("Enter a number: "))
+
+    for number in range(user_input, 0, -1):
+        print(f"{number}: {collatz(number)}")
+
 
 if __name__ == "__main__":
     main()
